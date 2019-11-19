@@ -1,5 +1,5 @@
 import json 
-
+from process_json import is_json
 print("Command line to interact with NoSQL DB")
 
 continue_on_cli = input("Press y to interact with db : ")
