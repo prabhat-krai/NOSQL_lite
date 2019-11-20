@@ -1,4 +1,5 @@
-from hashing import hash_key, check_key
+import os, json
+from hashing import hash_key
 #create record in db folder
 def add_file(name):
     name = hash_key(name)
@@ -11,10 +12,8 @@ def delete_file(name):
     file_name = "./db/{}.json".format(name)
     os.remove(file_name)
 
-def close_file(record):
-    return record.close()
 
-def read_file(key):
+def read_file(name):
     file_name = "./db/{}.json".format(name)
     record_value = json.loads(file_name)
     return record_value

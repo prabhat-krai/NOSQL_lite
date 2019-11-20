@@ -1,26 +1,32 @@
-from file_handling import add_file, delete_file, close_file, read_file
-from process_json import extract_key_value
-from index_of_db import check_for_record, load_index, update_index
+from process_json import is_json, extract_key_value
 from hashing import hash_key
+from file_handling import add_file, delete_file, read_file
+from index_of_db import check_for_record
 
-map_of_db = load_index()
-
-def add_record_to_db(json_input):
+def add_record_to_db(json_input, map_of_db):
     key, value = extract_key_value(json_input)
-    record = add_file(key)
-    record.write(value)
-    close_file(record)
+    value = str(value)
+    if(key is not None):
+        record = add_file(key)
+        record.write(value)
+        record.close()
+        map_of_db[hash_key(key)] = True
+        return map_of_db
+    else:
+        print("No key found")
 
-
-def remove_record_from_db(keys):
+def remove_record_from_db(keys, map_of_db):
+    print(map_of_db)
     for key in keys:
         key = hash_key(key)
-        if(check_for_record(key)):
+        if(check_for_record(key,map_of_db)):
             delete_file(key)
+            map_of_db[key] = False
         else:
             print("Key not present in db")
+    return map_of_db
 
-def search_record_in_db(value, fields):
+def search_record_in_db(value, fields, map_of_db):
     matching_records = []
     curb_results = False
     if(len(fields)):
