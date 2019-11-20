@@ -20,10 +20,9 @@ while(continue_on_cli == 'y'):
             print("not a valid JSON input")
 
     elif(task_to_perform == '2'):
-        input_key = input("Insert the key you want to delete : ")
-        input_value = input("Insert the value you want to delete : ")
+        input_key = input("Insert the key/keys you want to delete and space seperate them : ").split()
 
-        db.remove_records(input_key, input_value)
+        db.remove_records(input_key)
 
     elif(task_to_perform == '3'):
         input_value = input("Insert the value to find all the records with : ")
