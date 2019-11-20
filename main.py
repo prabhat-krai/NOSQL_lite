@@ -1,4 +1,5 @@
 import json 
+import os
 from process_json import is_json
 print("Command line to interact with NoSQL DB")
 

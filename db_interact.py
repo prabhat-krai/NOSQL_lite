@@ -1,1 +1,1 @@
-def add_record()
+def add_record(json_input):
