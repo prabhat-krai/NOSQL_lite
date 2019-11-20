@@ -1,3 +1,4 @@
+import json
 def is_json(json_input):
   try:
     json_check = json.loads(json_input)
@@ -14,4 +15,3 @@ def extract_key_value(json_input):
     value = json_input[key]
 
     return key, value
-
