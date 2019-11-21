@@ -13,10 +13,11 @@ Access the CLI for NoSQL through main.py
 2) A metadata is maintained for the db to increase query speeds.
 
 3) Two files contain the metadeta.
+
     a) map_of_db = This contains a hash map that has the names of all the keys in database to increase
                    the speed of searching a file for deletion. This helps us avoid scanning all data 
                    to find the desired key. 
-                   
+
     b) reverse_index = This maps every value that has been passed through inputs to files that they are 
                        stored in. So, when a search query is made for a value. This hash map is searched
                        all the files are extracted from it. These files have the required data and avoids
