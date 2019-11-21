@@ -1,7 +1,7 @@
-from db_interact import add_record_to_db, remove_record_from_db, search_record_in_db
-from config import map_of_db, reverse_index
-from process_json import is_json
-from index_of_db import update_index
+from db.db_interact import add_record_to_db, remove_record_from_db, search_record_in_db
+from db.metadata_loader import map_of_db, reverse_index
+from db.utils.process_json import is_json
+from db.index_of_db import update_index
 
 print("Command line to interact with NoSQL DB")
 
@@ -29,8 +29,8 @@ while(continue_on_cli == 'y'):
                                                                                                   #and reverse index of db
     elif(task_to_perform == '3'):
         search_value = input("Insert the value to find all the records with : ")
-        if(input("You want particular fields(press y to enter else any other alphabet)?") == 'y'):
-            fields = input("Insert the fields you want and space seperate them.").split()
+        if(input("You want particular fields(press y to enter else any other alphabet)? : ") == 'y'):
+            fields = input("Insert the fields you want and space seperate them. : ").split()
         else: 
             fields = [] #if no field is given by user
         search_record_in_db(search_value, fields, map_of_db, reverse_index)

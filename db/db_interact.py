@@ -1,7 +1,7 @@
-from process_json import is_json, extract_key_value, extract_all_values, extract_values
-from hashing import hash_key
-from file_handling import add_file, delete_file, read_file
-from index_of_db import check_for_record, add_reverse_index, remove_reverse_index
+from .utils.process_json import is_json, extract_key_value, extract_all_values, extract_values
+from .utils.hashing import hash_key
+from .utils.file_handling import add_file, delete_file, read_file
+from .index_of_db import check_for_record, add_reverse_index, remove_reverse_index
 
 def add_record_to_db(json_input, map_of_db, reverse_index):
     key, value = extract_key_value(json_input) #taking key of the input to store the data with it in db
@@ -43,11 +43,11 @@ def search_record_in_db(value, fields, map_of_db, reverse_index):
             result = [] #the data we need from this record
             if(curb_results): #if user requested particular fields
                 for field in fields: #going through a field at a time
-                    result.append(extract_values(record, field))  #extracting those field from record and appending t list
+                    result.append([field, extract_values(record, field)])  #extracting those field from record and appending t list
             else:
                 result.append(record) #if no specific fields needed. Adding the whole record to result.
             all_results.append(result) 
-    print(all_results) 
+        print(all_results) 
 
 
 

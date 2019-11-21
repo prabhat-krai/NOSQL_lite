@@ -1,4 +1,4 @@
-from index_of_db import load_index
+from .index_of_db import load_index
 
 #loads at the start and takes the data from json files that keep the 
 #info of data stored
