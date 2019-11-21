@@ -1,7 +1,7 @@
 from process_json import is_json, extract_key_value, extract_all_values, extract_values
 from hashing import hash_key
 from file_handling import add_file, delete_file, read_file
-from index_of_db import check_for_record, add_reverse_index
+from index_of_db import check_for_record, add_reverse_index, remove_reverse_index
 
 def add_record_to_db(json_input, map_of_db, reverse_index):
     key, value = extract_key_value(json_input)
@@ -22,6 +22,7 @@ def remove_record_from_db(keys, map_of_db, reverse_index):
     for key in keys:
         key = hash_key(key)
         if(check_for_record(key,map_of_db)):
+            reverse_index = remove_reverse_index(key,reverse_index)
             delete_file(key)
             map_of_db[key] = False
         else:
@@ -29,27 +30,24 @@ def remove_record_from_db(keys, map_of_db, reverse_index):
     return map_of_db, reverse_index
 
 def search_record_in_db(value, fields, map_of_db, reverse_index):
-    matching_records = []
+    all_results = []
     curb_results = False
-    if(len(fields)):
+    if(len(fields) > 0):
         curb_results = True
-
-    for key in map_of_db:
-        if(map_of_db[key]):
-            value_record = read_file(key)
-            for key_in_value in value_record:
-                if(value_record[key_in_value] == value):
-                    if(curb_results):
-                        intermediary_result = []
-                        for field in fields:
-                            if (field in value_record):
-                                intermediary_result.append(field + ":" + value_record[field])
-                            else:
-                                print("{} not present in record {}: ".format(field, key))
-                    break
-                matching_records.append(intermediary_result)
-
-    return matching_records
+    if(value not in reverse_index):
+        print("Value not present in DB")
+    else:
+        list_of_records = reverse_index[value]
+        for record in list_of_records:
+            record = read_file(record)
+            result = []
+            if(curb_results):
+                for field in fields:
+                    result.append(extract_values(record, field))
+            else:
+                result.append(record)
+            all_results.append(result)
+    print(all_results) 
 
 
 

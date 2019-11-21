@@ -35,3 +35,11 @@ def add_reverse_index(value_map, hashed_key, reverse_index):
             reverse_index[value].append(hashed_key)
     
     return reverse_index
+
+def remove_reverse_index(key, reverse_index):
+    for entry in reverse_index:
+        list_of_keys = reverse_index[entry]
+        list_of_keys = list(filter(lambda a: a != key, list_of_keys))
+        reverse_index[entry] = list_of_keys
+
+    return reverse_index

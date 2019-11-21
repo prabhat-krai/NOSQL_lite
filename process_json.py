@@ -17,7 +17,6 @@ def extract_key_value(json_input):
     return key, value
 
 def extract_values(obj, key):
-    obj = json.loads(obj)
     arr = []
     def extract(obj, arr, key):
         if isinstance(obj, (dict)):
