@@ -11,7 +11,8 @@ def check_for_record(record, map_of_db):
     else:
         return False
 
-def update_index():
+def update_index(map_of_db):
     with open('map_of_db.json', 'w') as f:
         json.dump(map_of_db, f)
+    
 

@@ -17,17 +17,15 @@ def extract_key_value(json_input):
     return key, value
 
 def extract_values(obj, key):
-    """Pull all values of specified key from nested JSON."""
+    obj = json.loads(obj)
     arr = []
-
     def extract(obj, arr, key):
-        """Recursively search for values of key in JSON tree."""
-        if isinstance(obj, dict):
+        if isinstance(obj, (dict)):
             for k, v in obj.items():
-                if isinstance(v, (dict, list)):
-                    extract(v, arr, key)
-                elif k == key:
+                if k == key:
                     arr.append(v)
+                elif isinstance(v, (dict, list)):
+                    extract(v, arr, key)
         elif isinstance(obj, list):
             for item in obj:
                 extract(item, arr, key)
@@ -35,3 +33,28 @@ def extract_values(obj, key):
 
     results = extract(obj, arr, key)
     return results
+
+
+def extract_all_values(obj):
+    obj = json.loads(obj)
+    arr = []
+
+    def extract_values(obj, arr):
+        if isinstance(obj, (dict)):
+            for k, v in obj.items():
+                if type(v) == str or type(v) == int:
+                    arr.append(v)
+                elif isinstance(v, (dict, list)):
+                    extract_values(v, arr)
+        elif isinstance(obj, list):
+            for item in obj:
+                extract_values(item, arr)
+        elif isinstance(obj, str):
+            arr.append(obj)
+        elif isinstance(obj, int):
+            arr.append(obj)
+        return arr
+
+    results = extract_values(obj, arr)
+    return results
+

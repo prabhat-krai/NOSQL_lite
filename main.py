@@ -1,6 +1,7 @@
 from db_interact import add_record_to_db, remove_record_from_db, search_record_in_db
 from config import map_of_db
 from process_json import is_json
+from index_of_db import update_index
 
 print("Command line to interact with NoSQL DB")
 
@@ -21,9 +22,9 @@ while(continue_on_cli == 'y'):
             print("not a valid JSON input")
 
     elif(task_to_perform == '2'):
-        input_key = input("Insert the key/keys you want to delete and space seperate them : ").split()
+        input_keys = input("Insert the key/keys you want to delete and space seperate them : ").split()
 
-        map_of_db = remove_record_from_db(input_key, map_of_db)
+        map_of_db = remove_record_from_db(input_keys, map_of_db)
 
     elif(task_to_perform == '3'):
         search_value = input("Insert the value to find all the records with : ")
@@ -32,11 +33,10 @@ while(continue_on_cli == 'y'):
         else: 
             fields = []
         map_of_db = search_record_in_db(search_value, fields, map_of_db)
-
     else:
         print("Wrong input.")
 
-
+    update_index(map_of_db)
     continue_on_cli = input("Press y to continue to interact with db : ")
 
 print("EXIT")

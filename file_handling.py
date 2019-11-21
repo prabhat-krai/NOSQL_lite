@@ -16,6 +16,7 @@ def delete_file(name):
 def read_file(name):
     file_name = "./db/{}.json".format(name)
     record_value = json.loads(file_name)
+    print(type(record_value))
     return record_value
     
     
