@@ -2,7 +2,6 @@ import os, json
 from hashing import hash_key
 #create record in db folder
 def add_file(name):
-    name = hash_key(name)
     file_name = "./db/{}.json".format(name)
     f = open(file_name,"w+")
     return f
