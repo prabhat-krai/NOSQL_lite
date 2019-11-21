@@ -4,7 +4,10 @@ NoSQL DB that takes json as input.
 The project has been done using Python 3.5.6 and only inbuilt libraries are used.
 No other installations are required.
 
-My implementation:
+Access the CLI for NoSQL through main.py
+
+## My implementation:
+
 1) I am storing individual inputs as json files in db folder. 
 
 2) A metadata is maintained for the db to increase query speeds.
@@ -13,6 +16,7 @@ My implementation:
     a) map_of_db = This contains a hash map that has the names of all the keys in database to increase
                    the speed of searching a file for deletion. This helps us avoid scanning all data 
                    to find the desired key. 
+                   
     b) reverse_index = This maps every value that has been passed through inputs to files that they are 
                        stored in. So, when a search query is made for a value. This hash map is searched
                        all the files are extracted from it. These files have the required data and avoids
